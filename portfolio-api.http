@@ -1,6 +1,5 @@
 @portfolio_api_HostAddress = http://localhost:5272
 
-GET {{portfolio_api_HostAddress}}/weatherforecast/
-Accept: application/json
+GET https://api.linkedin.com/v2/userinfo
+Authorization: Bearer AQX5EmwDJWX5TD4a3jVxTleBO2vTIScldxKCh4tYFf-7S9_HKHuBVQoGZN5GgLDA0zUi4YK00Zd9ehBPUYX96YKIsCH3noNxxjqzLGHIA5cVOlelKCJNSaLYB28luJ-vzsxKHi08FQKfGy4uqbZw_0QpiZA6H2h7-txXOX_4gmFTyYXUBcGKZ6KZZYr5yhJb4w2jvYwU8BG6ngsZBKOKt09aaVMf0PqgD1_Iafxx-dK0YPSSiQpgAkRhXJHPPrzxALnMHtfwCOCBbGQh7HMYZJm4WV4PY6E_joaLI-hWinSUyTi4DgAsHrB-ghiJ4wsm6rcjyCBHDkXEuYkBEaQJ4O5l_sdtGg
 
-###

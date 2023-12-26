@@ -30,3 +30,4 @@ C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\obj\Debug\ne
 C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\obj\Debug\net8.0\portfolio-api.pdb
 C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\obj\Debug\net8.0\portfolio-api.genruntimeconfig.cache
 C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\obj\Debug\net8.0\ref\portfolio-api.dll
+C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\obj\Debug\net8.0\portfolio-api.sourcelink.json
