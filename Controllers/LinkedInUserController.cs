@@ -12,7 +12,7 @@ namespace portfolio_api.Controllers
     public class LinkedInUserController : ControllerBase
     {
 
-        private const string LinkedinUserInfo = "https://api.linkedin.com/v2/userinfo/";
+        private const string LinkedinUserInfo = "https://api.lix-it.com/v1/person";
         private readonly HttpClient _http;
 
 
@@ -22,32 +22,22 @@ namespace portfolio_api.Controllers
         }
 
         [HttpGet("user")]
-        public async Task<LinkedInUser> GetLinkedInUserAsync(string accessToken)
+        public async Task<LinkedInUser> GetLinkedInUserAsync(string accessToken, string profileLink)
         {
-            return await ExecuteGetAsync(LinkedinUserInfo, accessToken);
+            return await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);
         }
 
-        [HttpGet("user/firstname")]
-        public async Task<string> GetUserFirstName(string accessToken)
-        {
-            try
-            {
-                var user = await GetLinkedInUserAsync(accessToken);
-                return user.FistName.ToString().Split(" ")[0];
-            }
-            catch (Exception err)
-            {
-                throw new Exception(err.Message);                
-            }
-        }
-
-        private async Task<LinkedInUser> ExecuteGetAsync(string url, string accessToken)
+        private async Task<LinkedInUser> ExecuteGetAsync(string url, string accessToken, string profileLink)
         {
 
             _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _http.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+            _http.DefaultRequestHeaders.Add("Authorization", $"{accessToken}");
 
-            var response = await _http.GetAsync(url);
+            var encodedProfileLink = Uri.EscapeDataString(profileLink);
+
+            var requestUrl = $"{url}?profile_link=https://linkedin.com/in/{encodedProfileLink}";
+
+            var response = await _http.GetAsync(requestUrl);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -75,5 +65,19 @@ namespace portfolio_api.Controllers
             return results;
         }
     }
+
+    /*[HttpGet("user/firstname")]
+        public async Task<string> GetUserFirstName(string accessToken)
+        {
+            try
+            {
+                var user = await GetLinkedInUserAsync(accessToken);
+                return user.FistName.ToString().Split(" ")[0];
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);                
+            }
+        }*/
 }
 
