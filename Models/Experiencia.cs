@@ -1,15 +1,35 @@
-﻿namespace portfolio_api.Models
+﻿using portfolio_api.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+public class Experiencia
 {
-    public class Experiencia
-    {
-        public string Description { get; set; } = string.Empty;
-        public string Title { get; set; } = string.Empty;
+    [Key]
+    public int ExperienciaId { get; set; }
 
-        public string DateStarted { get; set; } = string.Empty;
-        public string DateEnded { get; set; } = string.Empty;
+    [ForeignKey("LinkedInUser")]
+    public int UserId { get; set; }
 
-        public Organisation Org { get; set; }
+    [JsonPropertyName("description")]
+    public string Description { get; set; } = string.Empty;
 
-        public TimePeriod Period { get; set; }
-    }
+    [JsonPropertyName("title")]
+    public string Title { get; set; } = string.Empty;
+
+    [JsonPropertyName("dateStarted")]
+    public string DateStarted { get; set; }
+
+    [JsonPropertyName("dateEnded")]
+    public string? DateEnded { get; set; }
+
+    [ForeignKey("Organisation")]
+    public int OrganisationId { get; set; }
+
+    [JsonPropertyName("organisation")]
+    public Organisation Organisation { get; set; }
+
+    [ForeignKey("TimePeriod")]
+    public int TimePeriodId { get; set; }
+    public TimePeriod TimePeriod { get; set; }
 }

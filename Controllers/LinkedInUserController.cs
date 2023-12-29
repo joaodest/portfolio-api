@@ -4,6 +4,7 @@ using portfolio_api.Models;
 using static System.Net.WebRequestMethods;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using portfolio_api.Services;
 
 namespace portfolio_api.Controllers
 {
@@ -13,18 +14,29 @@ namespace portfolio_api.Controllers
     {
 
         private const string LinkedinUserInfo = "https://api.lix-it.com/v1/person";
+        private readonly ILinkedInUserService _services;
         private readonly HttpClient _http;
 
 
-        public LinkedInUserController(HttpClient http)
+        public LinkedInUserController(HttpClient http, ILinkedInUserService services)
         {
+            _services = services;
             _http = http;
         }
 
-        [HttpGet("user")]
-        public async Task<LinkedInUser> GetLinkedInUserAsync(string accessToken, string profileLink)
+        [HttpGet("teste")]
+        public IActionResult Teste()
         {
-            return await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);
+            return Ok("Teste");
+        }   
+
+        [HttpGet("user")]
+        public async Task<IActionResult> GetLinkedInUserAsync(string accessToken, string profileLink)
+        {
+            var linkedinUser = await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);
+            _services.CreateLinkedInUserAsync(linkedinUser);
+
+            return Ok(linkedinUser);
         }
 
         private async Task<LinkedInUser> ExecuteGetAsync(string url, string accessToken, string profileLink)
@@ -66,18 +78,6 @@ namespace portfolio_api.Controllers
         }
     }
 
-    /*[HttpGet("user/firstname")]
-        public async Task<string> GetUserFirstName(string accessToken)
-        {
-            try
-            {
-                var user = await GetLinkedInUserAsync(accessToken);
-                return user.FistName.ToString().Split(" ")[0];
-            }
-            catch (Exception err)
-            {
-                throw new Exception(err.Message);                
-            }
-        }*/
+
 }
 

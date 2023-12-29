@@ -1,20 +1,14 @@
-﻿namespace portfolio_api.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+public class TimePeriod
 {
-    public class TimePeriod
-    {
-        public StartedPeriod Started { get; set; }
-        public EndedOn Ended { get; set; }
-    }
+    [Key]
+    public int TimePeriodId { get; set; }
 
-    public class EndedOn
-    {
-        public string Month { get; set; } = string.Empty;
-        public string Year { get; set; } = string.Empty;
-    }
+    [ForeignKey("Experiencia")]
+    public int ExperienciaId { get; set; }
 
-    public class StartedPeriod
-    {
-        public string Month { get; set; } = string.Empty;
-        public string Year { get; set; } = string.Empty;
-    }
+    public int Month { get; set; }
+    public int Year { get; set; }
 }

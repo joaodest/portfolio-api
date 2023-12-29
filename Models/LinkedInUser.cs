@@ -1,11 +1,14 @@
 ﻿using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace portfolio_api.Models
 {
     public class LinkedInUser
     {
         //LIX API
+        [Key]
+        public int UserId { get; set; }
 
         [JsonPropertyName("description")]
         public string Headline { get; set; } = string.Empty;
