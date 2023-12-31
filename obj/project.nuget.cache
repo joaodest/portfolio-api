@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UZ5rHvgaQQlRbasYrAsyPJTYyGG4HytDdvYZkIZwqcel02SF4MpwvumX6H+qqDMYVM9jGCl7mE15UuNbe7Jx6A==",
+  "dgSpecHash": "NquUxJsSSTWwYyDzJVOkVDWrgG2Te+RgbfCCZhbQRNhxLf1iUQoGYVupQBHeRe1o76vymwpi51L6QbSqSuvRsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\joaod\\source\\portfolio-project\\portfolio-api\\portfolio-api\\portfolio-api.csproj",
+  "projectFilePath": "C:\\Users\\joaod\\source\\portfolio-project\\portfolio-api\\portfolio-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joaod\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\joaod\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
