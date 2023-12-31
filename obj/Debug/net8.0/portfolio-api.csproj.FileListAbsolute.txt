@@ -104,7 +104,6 @@ C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\bin\Debug\ne
 C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\joaod\source\portfolio-project\portfolio-api\portfolio-api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 <<<<<<< HEAD
-<<<<<<< HEAD
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\portfolio-api.csproj.AssemblyReference.cache
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\portfolio-api.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\portfolio-api.AssemblyInfoInputs.cache
@@ -209,7 +208,6 @@ C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\portfolio-api.csproj.CopyComplete
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\portfolio-api.genruntimeconfig.cache
 C:\Users\joaod\source\portfolio-project\project-api\portfolio-api\obj\Debug\net8.0\ref\portfolio-api.dll
-=======
 =======
 >>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
 C:\Users\joaod\source\portfolio-project\portfolio-api\bin\Debug\net8.0\appsettings.Development.json
@@ -317,7 +315,3 @@ C:\Users\joaod\source\portfolio-project\portfolio-api\obj\Debug\net8.0\refint\po
 C:\Users\joaod\source\portfolio-project\portfolio-api\obj\Debug\net8.0\portfolio-api.pdb
 C:\Users\joaod\source\portfolio-project\portfolio-api\obj\Debug\net8.0\portfolio-api.genruntimeconfig.cache
 C:\Users\joaod\source\portfolio-project\portfolio-api\obj\Debug\net8.0\ref\portfolio-api.dll
-<<<<<<< HEAD
->>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
-=======
->>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
