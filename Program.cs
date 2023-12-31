@@ -16,6 +16,13 @@ builder.Services.AddHttpClient<LinkedInUserController>(
         //client.DefaultRequestHeaders.Add("Accept", "application/json");
     });
 
+builder.Services.AddHttpClient<GithubUserController>(
+       client =>
+       {
+           client.BaseAddress = new Uri("https://api.github.com/user");
+           client.DefaultRequestHeaders.Add("User-Agent", "My GitHub App");
+
+       });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +35,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<ILinkedInUserRepository, LinkedInUserRepository>();
 builder.Services.AddScoped<ILinkedInUserService, LinkedInUserService>();
+
+builder.Services.AddScoped<IGithubUserRepository, GithubUserRepository>();
+builder.Services.AddScoped<IGithubUserService, GithubUserService>();
 
 var app = builder.Build();
 

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using portfolio_api.Models;
 using static System.Net.WebRequestMethods;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using portfolio_api.Services;
+using portfolio_api.Models.LinkedinModels;
 
 namespace portfolio_api.Controllers
 {
@@ -24,13 +24,7 @@ namespace portfolio_api.Controllers
             _http = http;
         }
 
-        [HttpGet("teste")]
-        public IActionResult Teste()
-        {
-            return Ok("Teste");
-        }   
-
-        [HttpGet("user")]
+        [HttpGet("linkedin-user")]
         public async Task<IActionResult> GetLinkedInUserAsync(string accessToken, string profileLink)
         {
             var linkedinUser = await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);

@@ -1,4 +1,4 @@
-﻿using portfolio_api.Models;
+﻿using portfolio_api.Models.LinkedinModels;
 
 namespace portfolio_api.Services
 {

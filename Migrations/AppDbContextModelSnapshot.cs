@@ -96,7 +96,41 @@ namespace portfolio_api.Migrations
                     b.ToTable("TimePeriods");
                 });
 
-            modelBuilder.Entity("portfolio_api.Models.LinkedInUser", b =>
+            modelBuilder.Entity("portfolio_api.Models.GithubModels.GithubUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvatarURL")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "avatar_url");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "email");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "login");
+
+                    b.Property<string>("ProfileURL")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "html_url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GithubUsers");
+                });
+
+            modelBuilder.Entity("portfolio_api.Models.LinkedinModels.LinkedInUser", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -129,7 +163,7 @@ namespace portfolio_api.Migrations
                     b.ToTable("LinkedInUsers");
                 });
 
-            modelBuilder.Entity("portfolio_api.Models.Organisation", b =>
+            modelBuilder.Entity("portfolio_api.Models.LinkedinModels.Organisation", b =>
                 {
                     b.Property<int>("OrganisationId")
                         .ValueGeneratedOnAdd()
@@ -150,11 +184,11 @@ namespace portfolio_api.Migrations
 
             modelBuilder.Entity("Experiencia", b =>
                 {
-                    b.HasOne("portfolio_api.Models.LinkedInUser", null)
+                    b.HasOne("portfolio_api.Models.LinkedinModels.LinkedInUser", null)
                         .WithMany("Experiences")
                         .HasForeignKey("LinkedInUserUserId");
 
-                    b.HasOne("portfolio_api.Models.Organisation", "Organisation")
+                    b.HasOne("portfolio_api.Models.LinkedinModels.Organisation", "Organisation")
                         .WithMany()
                         .HasForeignKey("OrganisationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -171,7 +205,7 @@ namespace portfolio_api.Migrations
                     b.Navigation("TimePeriod");
                 });
 
-            modelBuilder.Entity("portfolio_api.Models.LinkedInUser", b =>
+            modelBuilder.Entity("portfolio_api.Models.LinkedinModels.LinkedInUser", b =>
                 {
                     b.Navigation("Experiences");
                 });
