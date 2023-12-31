@@ -10,7 +10,11 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = portfolio_api
 build_property.RootNamespace = portfolio_api
 <<<<<<< HEAD
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\joaod\source\portfolio-project\portfolio-api-og\
+=======
+build_property.ProjectDir = C:\Users\joaod\source\portfolio-project\portfolio-api\
+>>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
 =======
 build_property.ProjectDir = C:\Users\joaod\source\portfolio-project\portfolio-api\
 >>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
@@ -20,7 +24,11 @@ build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 <<<<<<< HEAD
+<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = C:\Users\joaod\source\portfolio-project\portfolio-api-og
+=======
+build_property.MSBuildProjectDirectory = C:\Users\joaod\source\portfolio-project\portfolio-api
+>>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
 =======
 build_property.MSBuildProjectDirectory = C:\Users\joaod\source\portfolio-project\portfolio-api
 >>>>>>> dd7a5e3c47ff00caf2dd53c6237de9a4016b499f
