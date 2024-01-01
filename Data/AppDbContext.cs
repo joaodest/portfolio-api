@@ -17,6 +17,7 @@ namespace portfolio_api.Data
         public DbSet<TimePeriod> TimePeriods { get; set; }
 
         public DbSet<GithubUser> GithubUsers { get; set; }
+        public DbSet<FeaturedProjects> FeaturedProjects { get; set; }
 
     }
 }

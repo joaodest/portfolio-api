@@ -96,6 +96,39 @@ namespace portfolio_api.Migrations
                     b.ToTable("TimePeriods");
                 });
 
+            modelBuilder.Entity("portfolio_api.Models.GithubModels.FeaturedProjects", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Relational:JsonPropertyName", "id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "description");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("boolean")
+                        .HasAnnotation("Relational:JsonPropertyName", "private");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "html_url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FeaturedProjects");
+                });
+
             modelBuilder.Entity("portfolio_api.Models.GithubModels.GithubUser", b =>
                 {
                     b.Property<int>("Id")

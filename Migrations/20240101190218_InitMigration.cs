@@ -6,11 +6,43 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace portfolio_api.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "FeaturedProjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ProjectName = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: false),
+                    IsPrivate = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeaturedProjects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GithubUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Login = table.Column<string>(type: "text", nullable: false),
+                    AvatarURL = table.Column<string>(type: "text", nullable: false),
+                    ProfileURL = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GithubUsers", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "LinkedInUsers",
                 columns: table => new
@@ -47,10 +79,8 @@ namespace portfolio_api.Migrations
                     TimePeriodId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ExperienciaId = table.Column<int>(type: "integer", nullable: false),
-                    StartedMonth = table.Column<string>(type: "text", nullable: false),
-                    EndedMonth = table.Column<string>(type: "text", nullable: false),
-                    StartedYear = table.Column<string>(type: "text", nullable: false),
-                    EndedYear = table.Column<string>(type: "text", nullable: false)
+                    Month = table.Column<int>(type: "integer", nullable: false),
+                    Year = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,10 +96,10 @@ namespace portfolio_api.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
+                    DateStarted = table.Column<string>(type: "text", nullable: false),
+                    DateEnded = table.Column<string>(type: "text", nullable: true),
                     OrganisationId = table.Column<int>(type: "integer", nullable: false),
                     TimePeriodId = table.Column<int>(type: "integer", nullable: false),
-                    DateStartedTimePeriodId = table.Column<int>(type: "integer", nullable: false),
-                    DateEndedTimePeriodId = table.Column<int>(type: "integer", nullable: false),
                     LinkedInUserUserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -87,28 +117,12 @@ namespace portfolio_api.Migrations
                         principalColumn: "OrganisationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Experiencias_TimePeriods_DateEndedTimePeriodId",
-                        column: x => x.DateEndedTimePeriodId,
-                        principalTable: "TimePeriods",
-                        principalColumn: "TimePeriodId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Experiencias_TimePeriods_DateStartedTimePeriodId",
-                        column: x => x.DateStartedTimePeriodId,
+                        name: "FK_Experiencias_TimePeriods_TimePeriodId",
+                        column: x => x.TimePeriodId,
                         principalTable: "TimePeriods",
                         principalColumn: "TimePeriodId",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Experiencias_DateEndedTimePeriodId",
-                table: "Experiencias",
-                column: "DateEndedTimePeriodId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Experiencias_DateStartedTimePeriodId",
-                table: "Experiencias",
-                column: "DateStartedTimePeriodId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Experiencias_LinkedInUserUserId",
@@ -119,6 +133,11 @@ namespace portfolio_api.Migrations
                 name: "IX_Experiencias_OrganisationId",
                 table: "Experiencias",
                 column: "OrganisationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Experiencias_TimePeriodId",
+                table: "Experiencias",
+                column: "TimePeriodId");
         }
 
         /// <inheritdoc />
@@ -126,6 +145,12 @@ namespace portfolio_api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Experiencias");
+
+            migrationBuilder.DropTable(
+                name: "FeaturedProjects");
+
+            migrationBuilder.DropTable(
+                name: "GithubUsers");
 
             migrationBuilder.DropTable(
                 name: "LinkedInUsers");
