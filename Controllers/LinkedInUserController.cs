@@ -24,7 +24,7 @@ namespace portfolio_api.Controllers
             _http = http;
         }
 
-        [HttpGet("linkedin-user")]
+        [HttpGet("/user")]
         public async Task<IActionResult> GetLinkedInUserAsync(string accessToken, string profileLink)
         {
             var linkedinUser = await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);

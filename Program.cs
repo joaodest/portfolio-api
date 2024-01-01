@@ -39,6 +39,9 @@ builder.Services.AddScoped<ILinkedInUserService, LinkedInUserService>();
 builder.Services.AddScoped<IGithubUserRepository, GithubUserRepository>();
 builder.Services.AddScoped<IGithubUserService, GithubUserService>();
 
+builder.Services.AddScoped<IFeaturedProjectsRepository, FeaturedProjectsRepository>();
+builder.Services.AddScoped<IFeaturedProjectsService, FeaturedProjectsService>();
+
 var app = builder.Build();
 
 
