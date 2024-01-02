@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using portfolio_api.Services;
 using portfolio_api.Models.LinkedinModels;
+using portfolio_api.RabbitMQ.Publishers;
 
 namespace portfolio_api.Controllers
 {
@@ -16,12 +17,16 @@ namespace portfolio_api.Controllers
         private const string LinkedinUserInfo = "https://api.lix-it.com/v1/person";
         private readonly ILinkedInUserService _services;
         private readonly HttpClient _http;
+        private readonly IRabbitMQPublisher _rabbitMQ;
 
-
-        public LinkedInUserController(HttpClient http, ILinkedInUserService services)
+        public LinkedInUserController(
+            HttpClient http,
+            ILinkedInUserService services,
+            IRabbitMQPublisher rabbitMQ)
         {
             _services = services;
             _http = http;
+            _rabbitMQ = rabbitMQ;
         }
 
         [HttpGet("/user")]
@@ -30,6 +35,7 @@ namespace portfolio_api.Controllers
             var linkedinUser = await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);
             _services.CreateLinkedInUserAsync(linkedinUser);
 
+            _rabbitMQ.PublishObject<LinkedInUser>(linkedinUser);
             return Ok(linkedinUser);
         }
 

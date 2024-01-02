@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using portfolio_api.Models.GithubModels;
+using portfolio_api.RabbitMQ.Publishers;
 using portfolio_api.Services;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -14,15 +15,18 @@ namespace portfolio_api.Controllers
         private readonly HttpClient _http;
         private IGithubUserService _githubUserService;
         private IFeaturedProjectsService _featuredProjectsService;
+        private readonly IRabbitMQPublisher _rabbitMQ;
 
         public GithubUserController(
             HttpClient http,
             IGithubUserService githubUserService,
-            IFeaturedProjectsService featuredProjectsService)
+            IFeaturedProjectsService featuredProjectsService,
+            IRabbitMQPublisher rabbitMq)
         {
             _http = http;
             _githubUserService = githubUserService;
             _featuredProjectsService = featuredProjectsService;
+            _rabbitMQ = rabbitMq;
         }
 
         [HttpGet("api/github/user")]
@@ -30,6 +34,7 @@ namespace portfolio_api.Controllers
         {
             var githubUser = await ExecuteGetAsync<GithubUser>(accessToken, "https://api.github.com/user");
             await _githubUserService.CreateGithubUserAsync(githubUser);
+            _rabbitMQ.PublishObject<GithubUser>(githubUser);
             return Ok(githubUser);
         }
 
@@ -42,6 +47,7 @@ namespace portfolio_api.Controllers
             {
                 await _featuredProjectsService.AddFeaturedProjectAsync(repo);
             }
+
             return Ok(githubUserRepos);
         }
 
@@ -70,7 +76,7 @@ namespace portfolio_api.Controllers
             }
             catch (JsonException ex)
             {
-                // Aqui você pode logar detalhes do erro para ajudar na depuração
+                
                 throw new InvalidOperationException("Erro na deserialização do JSON.", ex);
             }
         }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using portfolio_api.Controllers;
 using portfolio_api.Data;
+using portfolio_api.RabbitMQ.Publishers;
 using portfolio_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,8 @@ builder.Services.AddScoped<IGithubUserService, GithubUserService>();
 
 builder.Services.AddScoped<IFeaturedProjectsRepository, FeaturedProjectsRepository>();
 builder.Services.AddScoped<IFeaturedProjectsService, FeaturedProjectsService>();
+
+builder.Services.AddSingleton<IRabbitMQPublisher, RabbitMQPublisher>();
 
 var app = builder.Build();
 
