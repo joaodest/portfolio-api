@@ -1,5 +1,6 @@
 ﻿using portfolio_api.Models.GithubModels;
 using RabbitMQ.Client;
+using Serilog;
 using System.Text;
 using System.Text.Json;
 
@@ -10,6 +11,7 @@ namespace portfolio_api.RabbitMQ.Publishers
         private readonly IConfiguration _configuration;
         private readonly IConnection _connection;
         private readonly IModel _channel;
+
         private bool _disposed = false;
 
         public RabbitMQPublisher(IConfiguration configuration)
@@ -20,7 +22,7 @@ namespace portfolio_api.RabbitMQ.Publishers
                 HostName = _configuration["RabbitMqHost"],
                 Port = _configuration.GetValue<int>("RabbitMqPort"),
             }.CreateConnection();
-            
+
             _channel = _connection.CreateModel();
 
             _channel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Fanout);
@@ -28,7 +30,7 @@ namespace portfolio_api.RabbitMQ.Publishers
 
         protected virtual void Dispose(bool disposing)
         {
-            if(_disposed)
+            if (_disposed)
             {
                 if (disposing)
                 {
@@ -42,17 +44,27 @@ namespace portfolio_api.RabbitMQ.Publishers
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }   
+        }
 
         public void PublishObject<T>(Object obj)
         {
-            string msg = JsonSerializer.Serialize(obj);
-            var body = Encoding.UTF8.GetBytes(msg);
+            try
+            {
+                string msg = JsonSerializer.Serialize(obj);
+                var body = Encoding.UTF8.GetBytes(msg);
 
-            _channel.BasicPublish(exchange: "trigger",
-                                 routingKey: "",
-                                 basicProperties: null,
-                                 body: body);
+                Log.Information($"Publicando mensagem: {msg}");
+                _channel.BasicPublish(exchange: "trigger",
+                                     routingKey: "",
+                                     basicProperties: null,
+                                     body: body);
+                Log.Information("Mensagem publicada com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Erro ao publicar mensagem: {ex.Message}");
+            }
+
         }
 
     }

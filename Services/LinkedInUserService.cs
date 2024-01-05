@@ -1,15 +1,18 @@
 ﻿using portfolio_api.Data;
 using portfolio_api.Models.LinkedinModels;
+using portfolio_api.RabbitMQ.Publishers;
 
 namespace portfolio_api.Services
 {
     public class LinkedInUserService : ILinkedInUserService
     {
         private readonly ILinkedInUserRepository _repository;
+        private readonly IRabbitMQPublisher _rabbitMQPublisher;
 
-        public LinkedInUserService(ILinkedInUserRepository repository)
+        public LinkedInUserService(ILinkedInUserRepository repository, IRabbitMQPublisher rabbitMQPublisher)
         {
             _repository = repository;
+            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
         public async Task CreateLinkedInUserAsync(LinkedInUser linkedInUser)
@@ -18,6 +21,7 @@ namespace portfolio_api.Services
             {
                 await _repository.CreateLinkedInUserAsync(linkedInUser);
                 await  _repository.SaveChangesAsync();  
+                _rabbitMQPublisher.PublishObject<LinkedInUser>(linkedInUser);
             }
             catch (HttpRequestException ex)
             {

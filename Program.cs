@@ -4,6 +4,7 @@ using portfolio_api.Controllers;
 using portfolio_api.Data;
 using portfolio_api.RabbitMQ.Publishers;
 using portfolio_api.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,15 @@ builder.Services.AddScoped<IFeaturedProjectsRepository, FeaturedProjectsReposito
 builder.Services.AddScoped<IFeaturedProjectsService, FeaturedProjectsService>();
 
 builder.Services.AddSingleton<IRabbitMQPublisher, RabbitMQPublisher>();
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs/portfolio-api.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+Log.Information("Hello from logging o/");
+
 
 var app = builder.Build();
 

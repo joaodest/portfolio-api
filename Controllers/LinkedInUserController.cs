@@ -33,7 +33,7 @@ namespace portfolio_api.Controllers
         public async Task<IActionResult> GetLinkedInUserAsync(string accessToken, string profileLink)
         {
             var linkedinUser = await ExecuteGetAsync(LinkedinUserInfo, accessToken, profileLink);
-            _services.CreateLinkedInUserAsync(linkedinUser);
+            await _services.CreateLinkedInUserAsync(linkedinUser);
 
             _rabbitMQ.PublishObject<LinkedInUser>(linkedinUser);
             return Ok(linkedinUser);
