@@ -1,5 +1,6 @@
 ﻿using portfolio_api.Data;
 using portfolio_api.Models.GithubModels;
+using portfolio_api.RabbitMQ.Publishers;
 
 namespace portfolio_api.Services
 {
@@ -7,10 +8,12 @@ namespace portfolio_api.Services
     {
 
         private readonly IFeaturedProjectsRepository _repository;
+        private readonly IRabbitMQPublisher _rabbitMQPublisher;
 
-        public FeaturedProjectsService(IFeaturedProjectsRepository repository)
+        public FeaturedProjectsService(IFeaturedProjectsRepository repository, IRabbitMQPublisher rabbitMQPublisher)
         {
             _repository = repository;
+            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
         public async Task AddFeaturedProjectAsync(FeaturedProjects project)

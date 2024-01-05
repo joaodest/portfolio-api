@@ -19,8 +19,21 @@ namespace portfolio_api.Data
 
         public async Task<FeaturedProjects> GetFeaturedProjectsByNameAsync(string name)
         {
-            return await _context.FeaturedProjects
+            try
+            {
+                var output = await _context.FeaturedProjects
                 .FirstOrDefaultAsync(p => p.ProjectName.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+                if (output == null)
+                {
+                    throw new Exception("Projeto não encontrado");
+                }
+                return output;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Não foi possível obter o projeto: {ex.Message}");
+            }
         }
 
         public async Task AddFeaturedProjectsAsync(FeaturedProjects project)
