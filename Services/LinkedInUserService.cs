@@ -19,8 +19,10 @@ namespace portfolio_api.Services
         {
             try
             {
+                linkedInUser.Username = linkedInUser.Link.Substring(linkedInUser.Link.LastIndexOf('/') + 1);
+
                 await _repository.CreateLinkedInUserAsync(linkedInUser);
-                await  _repository.SaveChangesAsync();  
+                await _repository.SaveChangesAsync();
                 _rabbitMQPublisher.PublishObject<LinkedInUser>(linkedInUser);
             }
             catch (HttpRequestException ex)

@@ -8,9 +8,6 @@ public class Experiencia
     [Key]
     public int ExperienciaId { get; set; }
 
-    [ForeignKey("LinkedInUser")]
-    public int UserId { get; set; }
-
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
 
@@ -32,4 +29,9 @@ public class Experiencia
     [ForeignKey("TimePeriod")]
     public int TimePeriodId { get; set; }
     public TimePeriod TimePeriod { get; set; }
+
+    [ForeignKey("LinkedInUser")]
+    public int UserId { get; set; }
+
+
 }

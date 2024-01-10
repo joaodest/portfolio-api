@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace portfolio_api.Models.GithubModels
@@ -12,7 +13,7 @@ namespace portfolio_api.Models.GithubModels
         public int Id { get; set; }
 
         [JsonPropertyName("login")]
-        public string Login { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
 
         [JsonPropertyName("avatar_url")]
         public string AvatarURL { get; set; } = string.Empty;

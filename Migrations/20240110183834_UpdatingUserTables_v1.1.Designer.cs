@@ -12,8 +12,8 @@ using portfolio_api.Data;
 namespace portfolio_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240101190218_InitMigration")]
-    partial class InitMigration
+    [Migration("20240110183834_UpdatingUserTables_v1.1")]
+    partial class UpdatingUserTables_v11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,8 +73,6 @@ namespace portfolio_api.Migrations
                     b.HasIndex("TimePeriodId");
 
                     b.ToTable("Experiencias");
-
-                    b.HasAnnotation("Relational:JsonPropertyName", "experience");
                 });
 
             modelBuilder.Entity("TimePeriod", b =>
@@ -151,15 +149,16 @@ namespace portfolio_api.Migrations
                         .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "email");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasAnnotation("Relational:JsonPropertyName", "login");
-
                     b.Property<string>("ProfileURL")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "html_url");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Login")
+                        .HasAnnotation("Relational:JsonPropertyName", "login");
 
                     b.HasKey("Id");
 
@@ -174,10 +173,9 @@ namespace portfolio_api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Property<string>("FistName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
+                    b.Property<int>("ExperienciaId")
+                        .HasColumnType("integer")
+                        .HasAnnotation("Relational:JsonPropertyName", "experience");
 
                     b.Property<string>("Headline")
                         .IsRequired()
@@ -189,10 +187,19 @@ namespace portfolio_api.Migrations
                         .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "link");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasAnnotation("Relational:JsonPropertyName", "aboutSummaryText");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("UserId");
 
@@ -206,6 +213,9 @@ namespace portfolio_api.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrganisationId"));
+
+                    b.Property<int>("ExperienciaId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -221,7 +231,7 @@ namespace portfolio_api.Migrations
             modelBuilder.Entity("Experiencia", b =>
                 {
                     b.HasOne("portfolio_api.Models.LinkedinModels.LinkedInUser", null)
-                        .WithMany("Experiences")
+                        .WithMany("Experiencias")
                         .HasForeignKey("LinkedInUserUserId");
 
                     b.HasOne("portfolio_api.Models.LinkedinModels.Organisation", "Organisation")
@@ -243,7 +253,7 @@ namespace portfolio_api.Migrations
 
             modelBuilder.Entity("portfolio_api.Models.LinkedinModels.LinkedInUser", b =>
                 {
-                    b.Navigation("Experiences");
+                    b.Navigation("Experiencias");
                 });
 #pragma warning restore 612, 618
         }

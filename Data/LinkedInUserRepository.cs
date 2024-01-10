@@ -16,7 +16,7 @@ namespace portfolio_api.Data
         {
             if (linkedInUser.Equals(null))
                 throw new ArgumentNullException(nameof(linkedInUser));
-
+            
              await _context.LinkedInUsers.AddAsync(linkedInUser);
         }
 

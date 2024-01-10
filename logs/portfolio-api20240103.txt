@@ -1,9 +1,0 @@
-2024-01-03 19:56:10.460 -03:00 [INF] Hello from logging o/
-2024-01-03 20:00:39.170 -03:00 [INF] Hello from logging o/
-2024-01-03 20:10:18.792 -03:00 [INF] Hello from logging o/
-2024-01-03 20:11:45.915 -03:00 [INF] Hello from logging o/
-2024-01-03 20:16:14.080 -03:00 [INF] Hello from logging o/
-2024-01-03 20:34:18.983 -03:00 [INF] Hello from logging o/
-2024-01-03 20:45:45.649 -03:00 [INF] Hello from logging o/
-2024-01-03 20:55:50.204 -03:00 [INF] Hello from logging o/
-2024-01-03 20:56:48.121 -03:00 [INF] Hello from logging o/
